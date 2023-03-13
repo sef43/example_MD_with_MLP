@@ -34,4 +34,4 @@ for fname, label in zip(["equilibrium_traj_2d.xyz", "test_traj_2d.xyz"],["refere
 plt.xlabel("r")
 plt.ylabel("PDF(r)")
 plt.legend()
-plt.show()
+plt.savefig("comparison.png")

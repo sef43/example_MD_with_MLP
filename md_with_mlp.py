@@ -1,7 +1,7 @@
 import numpy as np
 import torch
 from ase import Atoms, io
-from train_nnp import make_descriptor, NNP
+from train_mlp import make_descriptor, NNP
 
 # Settings
 M=10 # initial coordinate grid spacing
@@ -56,10 +56,13 @@ for t in range(Nsteps):
     # PBCs
     x = x - torch.floor(x/L)*L
 
-    
-    # Record output
+    # print some logs to screen
+    if t%1000==0:
+        print(t,"/",Nsteps, "Energy =", energies.item() )
+
+    # print data to trajectory
     if t%Nout==0:
-        print(t,"/", Nsteps, " energy = ", energies.item())
+
 
         xyz = torch.hstack((x, torch.zeros(N,1)))
         frame = Atoms(''.join(['C']*N), positions = xyz.numpy(), cell=(L,L,L), pbc=True, info={"energy": float(energies.detach().numpy())})

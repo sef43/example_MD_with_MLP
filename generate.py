@@ -65,10 +65,14 @@ for t in range(Nsteps):
     
     # PBCs
     x = x - torch.floor(x/L)*L
+
+
+    # print some logs to screen
+    if t%10000==0:
+        print(t,"/",Nsteps, "Energy =", energies.item() )
     
-    # Record output
+    # output to trajectory
     if t%Nout==0:
-        print(t,"/", Nsteps)
         
         xyz = torch.hstack((x, torch.zeros(N,1)))
         frame = Atoms(''.join(['C']*N), positions = xyz.numpy(), cell=(L,L,L), pbc=True, info={"energy": float(energies.detach().numpy())})
