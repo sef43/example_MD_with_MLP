@@ -92,4 +92,4 @@ for t in range(Nsteps):
 
 # write trajectorys using ASE
 io.write("generated_traj_2d.extxyz", frames)
-io.write("eqiulibrium_traj_2d.xyz", equilibrium_frames)
+io.write("equilibrium_traj_2d.xyz", equilibrium_frames)
